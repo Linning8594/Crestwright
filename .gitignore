@@ -1,0 +1,35 @@
+﻿# build output
+build/
+out/
+dist/
+
+# old/renamed bundles
+*.old
+*.old*
+
+# Visual Studio / CMake user files
+.vs/
+*.user
+CMakeUserPresets.json
+
+# binaries and symbols
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.obj
+
+# OS clutter
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# verification scratch
+verification/*.exe
+verification/*.obj
+verification/*.wav
+verification/*_gd.csv
+
+# local-only reference material (not published)
+verification/reference-preset.ffp
+verification/parse_preset.py
