@@ -50,7 +50,7 @@ private:
     // f0/Q values.
     PhaseNetwork phase;
 
-    // ---- 1176-flavoured compressor -----------------------------------------
+    // ---- FET-style compressor -----------------------------------------------
     struct Compressor
     {
         float env = 0.0f;

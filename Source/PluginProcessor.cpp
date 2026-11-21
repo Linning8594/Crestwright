@@ -254,7 +254,7 @@ void CrestwrightAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
             r = 0.0f;
         }
 
-        // 1176-flavoured, stereo-linked compressor
+        // FET-style, stereo-linked compressor
         const float preL = l, preR = r;
         comp.process (l, r);
 

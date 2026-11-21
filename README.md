@@ -1,6 +1,6 @@
 ﻿# Crestwright
 
-A six-section allpass phase module plus a single-knob 1176-style compressor.
+A six-section allpass phase module plus a single-knob FET-style compressor.
 Zero latency.
 
 ![Crestwright](docs/ui.png)

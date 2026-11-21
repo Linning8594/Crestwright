@@ -11,7 +11,7 @@ and the project uses [Semantic Versioning](https://semver.org/).
 - Initial public release of Crestwright.
 - Six-section second-order allpass phase module with 1x / 2x / 3x / 4x depth.
 - 30 ms click-free output crossfade between depth settings.
-- 1176-flavoured stereo-linked compressor with a detector-side high-pass.
+- FET-style stereo-linked compressor with a detector-side high-pass.
 - Parallel compressor mix, soft clipper, auto gain and polarity inversion.
 - Zero-latency signal path; double-precision phase-module state.
 
