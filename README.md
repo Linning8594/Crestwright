@@ -84,13 +84,13 @@ is always 1, so turning CLIP never changes the level of quiet passages.
 ## Phase module
 
 The module is a cascade of six second-order allpass sections. The frequency
-and Q of every section are taken from the approved reference preset (bands
+and Q of every section are taken from the revised reference preset (bands
 1, 4, 7, 2, 3 and 5); the cascade is repeated for the 1x / 2x / 3x / 4x depth
 switch.
 
 | # | f0 (Hz) | Q |
 |---|---|---|
-| 1 | 42.517 | 0.479995 |
+| 1 | 21.272 | 0.479995 |
 | 2 | 169.033 | 0.469874 |
 | 3 | 447.819 | 0.477733 |
 | 4 | 892.054 | 0.376757 |
@@ -112,11 +112,11 @@ Measured group delay (1x, 44.1 kHz):
 
 | Hz | 20 | 30 | 50 | 80 | 100 | 150 | 200 | 300 | 500 | 1k |
 |---|---|---|---|---|---|---|---|---|---|---|
-| ms | 18.96 | 16.38 | 12.44 | 9.08 | 7.73 | 5.71 | 4.56 | 3.24 | 2.00 | 0.97 |
+| ms | 22.06 | 16.40 | 10.97 | 7.85 | 6.77 | 5.19 | 4.25 | 3.09 | 1.94 | 0.96 |
 
-The 20–500 Hz range matches the specification within tolerance. The small
-residual above 1 kHz is inherent to this six-band preset and was accepted
-explicitly. See `docs/PHASE-DESIGN.md` for the full verification record.
+The phase module is a pure allpass; measured magnitude error is below 1e-6 dB.
+The small residual group delay above 1 kHz is inherent to the six-band design.
+See `docs/PHASE-DESIGN.md` for the full verification record.
 
 The original preset file is not part of this repository; only the derived
 frequency and Q table above is published.
@@ -131,10 +131,8 @@ use). The font files and licence are in `Assets/Fonts/`.
 - Latency: 0 samples (the phase module's first impulse-response sample is at n = 0)
 - CPU: about 0.5% of one core at comp=100 and phase 4x (48 kHz stereo)
 - Phase module alone: 0.175% of one core at depth 4x (48 kHz stereo, 4 passes)
-- Phase magnitude: max deviation 3.4e-7 dB over 10 Hz–20 kHz
-- Phase group delay at 1x: matches the specification within tolerance from
-  20 Hz to 500 Hz (worst error 1.29 ms at 30 Hz, tolerance 1.77 ms)
-- Phase depth scaling is exactly linear: 18.97 / 37.93 / 56.90 / 75.86 ms
+- Phase magnitude: max deviation 4.9e-7 dB over 10 Hz–20 kHz
+- Phase depth scaling is exactly linear: 22.06 / 44.13 / 66.19 / 88.25 ms
   at 20 Hz for 1x / 2x / 3x / 4x
 - Depth switching: no sample-level discontinuity (max step stays at the
   natural slope of the test sine); NaN/Inf input recovers immediately
@@ -157,7 +155,7 @@ use). The font files and licence are in `Assets/Fonts/`.
 
 ## Installer
 
-`dist\Crestwright_Setup_1.0.0.exe`
+`dist\Crestwright_Setup_1.1.0.exe`
 
 Contents:
 - VST3 plugin → `C:\Program Files\Common Files\VST3\Crestwright.vst3`

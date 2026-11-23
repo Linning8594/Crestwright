@@ -13,11 +13,12 @@
     A cascade of six second-order allpass sections, repeated up to four times
     for the 1x/2x/3x/4x depth switch.
 
-    The six (f0, Q) pairs are taken verbatim from the approved reference
-    preset (kept locally as verification/reference-preset.ffp, not part of
-    the public repository), bands 1, 4, 7, 2, 3 and 5 sorted by frequency:
+    The six (f0, Q) pairs are taken verbatim from the revised reference
+    preset (v2; kept locally as verification/reference-preset-v2.ffp, not
+    part of the public repository), bands 1, 4, 7, 2, 3 and 5 sorted by
+    frequency:
 
-        f0 =  42.517 Hz   Q = 0.479995
+        f0 =  21.272 Hz   Q = 0.479995
         f0 = 169.033 Hz   Q = 0.469874
         f0 = 447.819 Hz   Q = 0.477733
         f0 = 892.054 Hz   Q = 0.376757
@@ -64,7 +65,7 @@ struct PhaseNetwork
     // ---- reference preset data ------------------------------------------
     static constexpr double kF0[kNumSections] =
     {
-        42.516985963660, 169.033344043676, 447.819093846016,
+        21.272339342794353, 169.033344043676, 447.819093846016,
         892.054005153722, 1873.367204745139, 6367.350518082420
     };
 

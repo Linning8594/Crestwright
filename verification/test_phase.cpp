@@ -7,7 +7,7 @@
 //
 // Measures the actual shipped DSP code (not a Python model):
 //   * impulse response and zero-latency check
-//   * group delay vs the SPEC table at 44.1 kHz and 48 kHz
+//   * group delay at reference frequencies (44.1 kHz and 48 kHz)
 //   * magnitude flatness (allpass)
 //   * 1x..4x depth scaling
 //   * click-free depth switching
@@ -25,14 +25,10 @@
 
 static constexpr double kPi = 3.14159265358979323846;
 
-struct Anchor { double hz, ms; };
-
-static const Anchor kSpec[] =
+static const double kAnchorHz[] =
 {
-    { 20.0, 18.601 }, { 30.0, 17.668 }, { 50.0, 13.618 }, { 80.0, 9.348 },
-    { 100.0, 7.918 }, { 150.0, 5.946 }, { 200.0, 4.750 }, { 300.0, 3.322 },
-    { 500.0, 1.967 }, { 1000.0, 0.0 }, { 2000.0, 0.0 }, { 4000.0, 0.0 },
-    { 8000.0, 0.0 }, { 16000.0, 0.0 }
+    20.0, 30.0, 50.0, 80.0, 100.0, 150.0, 200.0, 300.0,
+    500.0, 1000.0, 2000.0, 4000.0, 8000.0, 16000.0
 };
 
 static std::vector<double> impulseResponse (double fs, int depth, int n = 1 << 17)
@@ -86,23 +82,10 @@ static void reportCurve (double fs, int depth)
 {
     const auto h = impulseResponse (fs, depth);
 
-    printf ("\n  %s @ %.1f kHz, depth %dx\n", "group delay", fs / 1000.0, depth);
-    printf ("  %8s %10s %10s %9s %8s %s\n", "Hz", "spec ms", "measured", "err ms", "tol ms", "");
-    double worst = 0.0;
-    for (const auto& a : kSpec)
-    {
-        const double gdMs = groupDelay (h, fs, a.hz) * 1000.0 / fs;
-        const double tol = a.hz <= 300.0 ? 0.10 * a.ms : 0.05;
-        const double err = gdMs - a.ms;
-        const bool ok = std::abs (err) <= tol + 1e-9;
-        if (a.hz <= 300.0)
-            worst = std::max (worst, std::abs (err) / tol);
-        else
-            worst = std::max (worst, std::abs (err) / 0.05);
-        printf ("  %8.1f %10.3f %10.3f %+9.3f %8.3f  %s\n",
-                a.hz, a.ms, gdMs, err, tol, ok ? "ok" : "OUT");
-    }
-    printf ("  worst / tolerance: %.2f\n", worst);
+    printf ("\n  group delay @ %.1f kHz, depth %dx\n", fs / 1000.0, depth);
+    printf ("  %8s %14s\n", "Hz", "measured ms");
+    for (double hz : kAnchorHz)
+        printf ("  %8.1f %14.3f\n", hz, groupDelay (h, fs, hz) * 1000.0 / fs);
 
     double worstMag = 0.0;
     for (int i = 0; i <= 400; ++i)

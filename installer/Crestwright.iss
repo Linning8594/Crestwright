@@ -2,7 +2,7 @@
 ; Copyright (c) 2026 Linning
 
 #define MyAppName "Crestwright"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "Linning"
 #define MyAppExeName "Crestwright.exe"
 #define BuildDir "D:\CheStuWorSpace_1\Crestwright\build\Crestwright_artefacts\Release"

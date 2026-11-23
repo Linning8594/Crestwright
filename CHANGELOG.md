@@ -4,6 +4,23 @@ All notable changes to Crestwright are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-11-23
+
+### Changed
+
+- Phase module updated to the revised six-band allpass preset (v2). The
+  lowest section moved to 21.272 Hz; the other five sections are unchanged.
+- Group delay at 1x is now 22.06 ms at 20 Hz, 16.40 ms at 30 Hz and 10.97 ms
+  at 50 Hz (44.1 kHz).
+- Depth scaling: 22.06 / 44.13 / 66.19 / 88.25 ms at 20 Hz for 1x–4x.
+- Version bumped to 1.1.0.
+
+### Measurements
+
+- Phase magnitude deviation below 1e-6 dB from 10 Hz to 20 kHz
+  (4.9e-7 dB measured at 44.1 kHz).
+- No change to latency, compressor or clipper behaviour.
+
 ## [1.0.0] - 2026-11-22
 
 ### Added

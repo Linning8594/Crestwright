@@ -31,5 +31,5 @@ verification/*.wav
 verification/*_gd.csv
 
 # local-only reference material (not published)
-verification/reference-preset.ffp
+verification/*.ffp
 verification/parse_preset.py
