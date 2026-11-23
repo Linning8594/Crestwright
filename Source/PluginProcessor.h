@@ -5,6 +5,7 @@
 
 #include <juce_audio_processors/juce_audio_processors.h>
 #include "PhaseNetwork.h"
+#include "TransientShaper.h"
 
 class CrestwrightAudioProcessor : public juce::AudioProcessor,
                                  private juce::AudioProcessorValueTreeState::Listener
@@ -44,8 +45,13 @@ public:
 private:
     static juce::AudioProcessorValueTreeState::ParameterLayout createLayout();
 
+    // ---- fixed input-stage transient shaper --------------------------------
+    // Always active, no parameter and no UI. Adds a fixed +5% attack
+    // emphasis at the very front of the chain. See TransientShaper.h.
+    TransientShaper transientShaper;
+
     // ---- phase module ------------------------------------------------------
-    // Six second-order allpass sections from the approved reference preset,
+    // Second-order allpass sections from the approved reference preset,
     // repeated for 1x..4x. See PhaseNetwork.h for the design and the exact
     // f0/Q values.
     PhaseNetwork phase;

@@ -1,7 +1,7 @@
 ﻿# Crestwright
 
-A six-section allpass phase module plus a single-knob FET-style compressor.
-Zero latency.
+An always-on +5% attack transient shaper, a two-section allpass phase module
+and a single-knob FET-style compressor. Zero latency.
 
 ![Crestwright](docs/ui.png)
 
@@ -19,7 +19,7 @@ Zero latency.
 - **PHASE INVERT**: output polarity inversion (exact 180°)
 - **GAIN REDUCTION**: real-time gain-reduction meter (30 Hz refresh), with every divider line labelled 3 / 6 / 12 / 20 dB
 
-Signal path: INPUT → phase cascade → compressor (12 dB/oct HPF in front of the detector) → COMP-MIX → CLIP → AUTO GAIN → OUTPUT → PHASE INVERT
+Signal path: fixed +5% attack shaper → INPUT → phase cascade → compressor (12 dB/oct HPF in front of the detector) → COMP-MIX → CLIP → AUTO GAIN → OUTPUT → PHASE INVERT
 
 ## Knob controls
 
@@ -83,26 +83,21 @@ is always 1, so turning CLIP never changes the level of quiet passages.
 
 ## Phase module
 
-The module is a cascade of six second-order allpass sections. The frequency
+The module is a cascade of two second-order allpass sections. The frequency
 and Q of every section are taken from the revised reference preset (bands
-1, 4, 7, 2, 3 and 5); the cascade is repeated for the 1x / 2x / 3x / 4x depth
-switch.
+1 and 4); the cascade is repeated for the 1x / 2x / 3x / 4x depth switch.
 
 | # | f0 (Hz) | Q |
 |---|---|---|
-| 1 | 21.272 | 0.479995 |
-| 2 | 169.033 | 0.469874 |
-| 3 | 447.819 | 0.477733 |
-| 4 | 892.054 | 0.376757 |
-| 5 | 1873.367 | 0.471898 |
-| 6 | 6367.351 | 0.475947 |
+| 1 | 40.068 | 0.555778 |
+| 2 | 183.340 | 0.500000 |
 
 - Each section is the standard bilinear (RBJ) second-order allpass
   `H(z) = (a2 + a1 z⁻¹ + z⁻²) / (1 + a1 z⁻¹ + a2 z⁻²)`
 - Pure allpass: measured magnitude error is below 1e-6 dB
 - Zero latency; coefficients are recalculated from the sample rate in
   `prepare()` and never allocated afterwards
-- Depth 2x/3x/4x runs the same six-section cascade two/three/four times
+- Depth 2x/3x/4x runs the same two-section cascade two/three/four times
 - Depth changes crossfade over 30 ms; all four taps keep running so the
   switch is a pure output crossfade with no filter-state discontinuity
 - Double precision state, pole radius capped at 0.9995, automatic reset on
@@ -112,14 +107,22 @@ Measured group delay (1x, 44.1 kHz):
 
 | Hz | 20 | 30 | 50 | 80 | 100 | 150 | 200 | 300 | 500 | 1k |
 |---|---|---|---|---|---|---|---|---|---|---|
-| ms | 22.06 | 16.40 | 10.97 | 7.85 | 6.77 | 5.19 | 4.25 | 3.09 | 1.94 | 0.96 |
+| ms | 16.46 | 14.49 | 10.06 | 6.18 | 4.85 | 3.08 | 2.15 | 1.20 | 0.50 | 0.14 |
 
 The phase module is a pure allpass; measured magnitude error is below 1e-6 dB.
-The small residual group delay above 1 kHz is inherent to the six-band design.
+The small residual group delay above 1 kHz is inherent to the two-band design.
 See `docs/PHASE-DESIGN.md` for the full verification record.
 
 The original preset file is not part of this repository; only the derived
 frequency and Q table above is published.
+
+## Transient shaper
+
+A fixed transient shaper runs at the very front of the chain, before INPUT.
+It is always active and has no control in the UI. It adds up to +5% attack
+(gain 1.00 → 1.05, about +0.42 dB) and leaves the sustain alone; on steady
+material the gain returns to exactly 1.00. It is stereo-linked and
+zero-latency.
 
 ## Fonts
 
@@ -129,11 +132,13 @@ use). The font files and licence are in `Assets/Fonts/`.
 ## Measurements
 
 - Latency: 0 samples (the phase module's first impulse-response sample is at n = 0)
-- CPU: about 0.5% of one core at comp=100 and phase 4x (48 kHz stereo)
-- Phase module alone: 0.175% of one core at depth 4x (48 kHz stereo, 4 passes)
-- Phase magnitude: max deviation 4.9e-7 dB over 10 Hz–20 kHz
-- Phase depth scaling is exactly linear: 22.06 / 44.13 / 66.19 / 88.25 ms
+- CPU: about 0.4% of one core at comp=100 and phase 4x (48 kHz stereo)
+- Phase module alone: 0.061% of one core at depth 4x (48 kHz stereo, 4 passes)
+- Phase magnitude: max deviation 2.3e-7 dB over 10 Hz–20 kHz
+- Phase depth scaling is exactly linear: 16.46 / 32.92 / 49.38 / 65.84 ms
   at 20 Hz for 1x / 2x / 3x / 4x
+- Transient shaper: maximum +5.00% attack (gain 1.050, about +0.42 dB);
+  steady-state gain returns to 1.000; zero latency
 - Depth switching: no sample-level discontinuity (max step stays at the
   natural slope of the test sine); NaN/Inf input recovers immediately
 - Phase invert: exact 180.0°, 0.00 dB level difference
@@ -155,7 +160,7 @@ use). The font files and licence are in `Assets/Fonts/`.
 
 ## Installer
 
-`dist\Crestwright_Setup_1.1.0.exe`
+`dist\Crestwright_Setup_1.2.0.exe`
 
 Contents:
 - VST3 plugin → `C:\Program Files\Common Files\VST3\Crestwright.vst3`

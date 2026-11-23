@@ -1,6 +1,6 @@
 ﻿# macOS での Crestwright のビルド
 
-Crestwright 1.1.0 · JUCE 9.0.5 · VST3 + スタンドアロン
+Crestwright 1.2.0 · JUCE 9.0.5 · VST3 + スタンドアロン
 
 このガイドでは macOS 上でソースからプラグインをビルドします。出力は VST3 バンドルとスタンドアロンアプリです。個人利用であれば署名証明書は不要です。
 
@@ -91,4 +91,4 @@ codesign --force --deep --sign - ~/Library/Audio/Plug-Ins/VST3/Crestwright.vst3
 - Audio Unit は既定ではビルドされません。Logic Pro で使う場合は `CMakeLists.txt` の `FORMATS VST3 Standalone` を `FORMATS VST3 Standalone AU` に変更して再ビルドしてください。AU は `Crestwright_artefacts/Release/AU/` に出力されます。
 - Windows 用インストーラー（`installer/Crestwright.iss`）は macOS では使いません。
 - 外部ランタイム依存はありません。Inter フォントはバイナリに埋め込まれています。
-- ソースのバージョン：1.1.0。
+- ソースのバージョン：1.2.0。

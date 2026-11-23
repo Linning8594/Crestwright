@@ -10,20 +10,15 @@
 //==============================================================================
 /** Crestwright phase module.
 
-    A cascade of six second-order allpass sections, repeated up to four times
+    A cascade of second-order allpass sections, repeated up to four times
     for the 1x/2x/3x/4x depth switch.
 
-    The six (f0, Q) pairs are taken verbatim from the revised reference
-    preset (v2; kept locally as verification/reference-preset-v2.ffp, not
-    part of the public repository), bands 1, 4, 7, 2, 3 and 5 sorted by
-    frequency:
+    The (f0, Q) pairs are taken verbatim from the revised reference preset
+    (v3; kept locally as verification/reference-preset-v3.ffp, not part of
+    the public repository), bands 1 and 4 sorted by frequency:
 
-        f0 =  21.272 Hz   Q = 0.479995
-        f0 = 169.033 Hz   Q = 0.469874
-        f0 = 447.819 Hz   Q = 0.477733
-        f0 = 892.054 Hz   Q = 0.376757
-        f0 = 1873.367 Hz  Q = 0.471898
-        f0 = 6367.351 Hz  Q = 0.475947
+        f0 =  40.068 Hz   Q = 0.555778
+        f0 = 183.340 Hz   Q = 0.500000
 
     Every section is the standard bilinear (RBJ) second-order allpass:
 
@@ -43,15 +38,15 @@
 
     All four depth taps are always evaluated so the state of every tap stays
     valid; a depth change is then a pure output crossfade with no state
-    discontinuity. The cost is 4 * 6 = 24 biquads per channel, which is still
-    far below one percent of a modern core at 48 kHz.
+    discontinuity. The cost is 4 * 2 = 8 biquads per channel, which is far
+    below one percent of a modern core at 48 kHz.
 
     This header deliberately has no JUCE dependency so it can be compiled and
     measured on its own by verification/test_phase.cpp.
 */
 struct PhaseNetwork
 {
-    static constexpr int kNumSections = 6;
+    static constexpr int kNumSections = 2;
     static constexpr int kMaxPasses   = 4;   // 1x .. 4x
     static constexpr double kCrossfadeSeconds = 0.030;
     static constexpr double kMaxPoleRadius    = 0.9995;
@@ -65,14 +60,12 @@ struct PhaseNetwork
     // ---- reference preset data ------------------------------------------
     static constexpr double kF0[kNumSections] =
     {
-        21.272339342794353, 169.033344043676, 447.819093846016,
-        892.054005153722, 1873.367204745139, 6367.350518082420
+        40.067983877449, 183.340062190770
     };
 
     static constexpr double kQ[kNumSections] =
     {
-        0.479995399714, 0.469873934984, 0.477732777596,
-        0.376756578684, 0.471898287535, 0.475946873426
+        0.555777788162, 0.500000000000
     };
 
     // ---- lifecycle -------------------------------------------------------

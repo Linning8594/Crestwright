@@ -4,6 +4,23 @@ All notable changes to Crestwright are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-11-24
+
+### Changed
+
+- Phase module replaced with the revised two-section allpass preset (v3):
+  40.068 Hz / Q 0.555778 and 183.340 Hz / Q 0.500000.
+- Group delay at 1x is now 16.46 ms at 20 Hz, 14.49 ms at 30 Hz and 10.06 ms
+  at 50 Hz (44.1 kHz).
+- Depth scaling: 16.46 / 32.92 / 49.38 / 65.84 ms at 20 Hz for 1x–4x.
+- Phase module CPU reduced to about 0.06% of one core at 4x, 48 kHz stereo.
+
+### Added
+
+- Fixed, always-on transient shaper at the very front of the chain. It adds
+  up to +5% attack (gain 1.00 → 1.05, about +0.42 dB) with no UI control, no
+  bypass and no sustain change. Steady-state gain returns to 1.000.
+
 ## [1.1.0] - 2026-11-23
 
 ### Changed

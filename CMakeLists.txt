@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Linning
 
 cmake_minimum_required(VERSION 3.22)
-project(Crestwright VERSION 1.1.0 LANGUAGES C CXX)
+project(Crestwright VERSION 1.2.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -33,7 +33,8 @@ juce_add_plugin(Crestwright
 target_sources(Crestwright PRIVATE
     Source/PluginProcessor.cpp
     Source/PluginEditor.cpp
-    Source/PhaseNetwork.h)
+    Source/PhaseNetwork.h
+    Source/TransientShaper.h)
 
 juce_add_binary_data(CrestwrightData SOURCES
     Assets/Fonts/Inter-Regular.ttf

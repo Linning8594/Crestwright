@@ -163,6 +163,9 @@ void CrestwrightAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     currentSampleRate = sampleRate > 0.0 ? sampleRate : 48000.0;
 
+    transientShaper.prepare (currentSampleRate);
+    transientShaper.reset();
+
     phase.prepare (currentSampleRate);
     phase.setDepth (juce::jlimit (1, 4, 1 + (int) std::lround (pPhaseQ->load())));
 
@@ -235,6 +238,9 @@ void CrestwrightAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         float l = left[i];
         float r = right != nullptr ? right[i] : l;
 
+        // fixed, invisible attack shaper at the very front of the chain
+        transientShaper.process (l, r);
+
         l *= inGain;
         r *= inGain;
 
@@ -248,6 +254,7 @@ void CrestwrightAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         if (!std::isfinite (l) || !std::isfinite (r)
             || std::abs (l) > 1.0e4f || std::abs (r) > 1.0e4f)
         {
+            transientShaper.reset();
             phase.reset();
             comp.reset();
             l = 0.0f;
