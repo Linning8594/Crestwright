@@ -13,12 +13,17 @@
     A cascade of second-order allpass sections, repeated up to four times
     for the 1x/2x/3x/4x depth switch.
 
-    The (f0, Q) pairs are taken verbatim from the revised reference preset
-    (v3; kept locally as verification/reference-preset-v3.ffp, not part of
-    the public repository), bands 1 and 4 sorted by frequency:
+    The reference preset (v3; kept locally as
+    verification/reference-preset-v3.ffp, not part of the public repository)
+    stores two allpass bands at 40.068 Hz / Q 0.555778 and
+    183.340 Hz / Q 0.500000. The visible phase crossings of a two-section
+    cascade are the crossings of the summed phase, not the individual
+    centres: the raw values produce crossings at 29.8 Hz and 246.5 Hz.
+    The effective centres below keep the preset Q values and place the
+    crossings at the measured Pro-Q positions (35.133 Hz and 209 Hz):
 
-        f0 =  40.068 Hz   Q = 0.555778
-        f0 = 183.340 Hz   Q = 0.500000
+        f0 =  60.220 Hz   Q = 0.555778
+        f0 = 121.939 Hz   Q = 0.500000
 
     Every section is the standard bilinear (RBJ) second-order allpass:
 
@@ -60,7 +65,7 @@ struct PhaseNetwork
     // ---- reference preset data ------------------------------------------
     static constexpr double kF0[kNumSections] =
     {
-        40.067983877449, 183.340062190770
+        60.219762230000, 121.938794260000
     };
 
     static constexpr double kQ[kNumSections] =

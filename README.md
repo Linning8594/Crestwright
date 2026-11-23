@@ -89,8 +89,8 @@ and Q of every section are taken from the revised reference preset (bands
 
 | # | f0 (Hz) | Q |
 |---|---|---|
-| 1 | 40.068 | 0.555778 |
-| 2 | 183.340 | 0.500000 |
+| 1 | 60.220 | 0.555778 |
+| 2 | 121.939 | 0.500000 |
 
 - Each section is the standard bilinear (RBJ) second-order allpass
   `H(z) = (a2 + a1 z⁻¹ + z⁻²) / (1 + a1 z⁻¹ + a2 z⁻²)`
@@ -107,7 +107,11 @@ Measured group delay (1x, 44.1 kHz):
 
 | Hz | 20 | 30 | 50 | 80 | 100 | 150 | 200 | 300 | 500 | 1k |
 |---|---|---|---|---|---|---|---|---|---|---|
-| ms | 16.46 | 14.49 | 10.06 | 6.18 | 4.85 | 3.08 | 2.15 | 1.20 | 0.50 | 0.14 |
+| ms | 14.28 | 13.60 | 11.37 | 7.83 | 6.10 | 3.53 | 2.25 | 1.12 | 0.43 | 0.11 |
+
+The allpass centres are compensated so the summed-phase crossings land at
+35.133 Hz and 209 Hz, matching the measured reference curve. The preset's
+nominal centres are 40.068 Hz and 183.340 Hz.
 
 The phase module is a pure allpass; measured magnitude error is below 1e-6 dB.
 The small residual group delay above 1 kHz is inherent to the two-band design.
@@ -133,9 +137,9 @@ use). The font files and licence are in `Assets/Fonts/`.
 
 - Latency: 0 samples (the phase module's first impulse-response sample is at n = 0)
 - CPU: about 0.4% of one core at comp=100 and phase 4x (48 kHz stereo)
-- Phase module alone: 0.061% of one core at depth 4x (48 kHz stereo, 4 passes)
-- Phase magnitude: max deviation 2.3e-7 dB over 10 Hz–20 kHz
-- Phase depth scaling is exactly linear: 16.46 / 32.92 / 49.38 / 65.84 ms
+- Phase module alone: 0.062% of one core at depth 4x (48 kHz stereo, 4 passes)
+- Phase magnitude: max deviation 3.0e-7 dB over 10 Hz–20 kHz
+- Phase depth scaling is exactly linear: 14.28 / 28.55 / 42.83 / 57.11 ms
   at 20 Hz for 1x / 2x / 3x / 4x
 - Transient shaper: maximum +5.00% attack (gain 1.050, about +0.42 dB);
   steady-state gain returns to 1.000; zero latency
@@ -160,7 +164,7 @@ use). The font files and licence are in `Assets/Fonts/`.
 
 ## Installer
 
-`dist\Crestwright_Setup_1.2.0.exe`
+`dist\Crestwright_Setup_1.2.1.exe`
 
 Contents:
 - VST3 plugin → `C:\Program Files\Common Files\VST3\Crestwright.vst3`

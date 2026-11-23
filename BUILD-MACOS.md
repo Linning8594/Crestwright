@@ -1,6 +1,6 @@
 ﻿# Building Crestwright on macOS
 
-Crestwright 1.2.0 · JUCE 9.0.5 · VST3 + Standalone
+Crestwright 1.2.1 · JUCE 9.0.5 · VST3 + Standalone
 
 This guide builds the plugin from source on macOS. The result is a VST3 bundle
 and a standalone app. No signing certificate is required for personal use.
@@ -101,4 +101,4 @@ codesign --force --deep --sign - ~/Library/Audio/Plug-Ins/VST3/Crestwright.vst3
 - The Windows installer script (`installer/Crestwright.iss`) is not used on macOS.
 - There are no external runtime dependencies; the Inter fonts are embedded in
   the binary.
-- Source version: 1.2.0.
+- Source version: 1.2.1.

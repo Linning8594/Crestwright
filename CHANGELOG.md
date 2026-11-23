@@ -4,6 +4,18 @@ All notable changes to Crestwright are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.2.1] - 2026-11-24
+
+### Fixed
+
+- Compensated the allpass centres so the summed-phase crossings match the
+  reference Pro-Q curve at 35.133 Hz and 209 Hz. The effective centres are
+  60.220 Hz / Q 0.555778 and 121.939 Hz / Q 0.500000; the preset's nominal
+  centres remain 40.068 Hz / 183.340 Hz.
+- Group delay at 1x is now 14.28 ms at 20 Hz, 13.60 ms at 30 Hz and 11.37 ms
+  at 50 Hz (44.1 kHz).
+- Depth scaling: 14.28 / 28.55 / 42.83 / 57.11 ms at 20 Hz for 1x–4x.
+
 ## [1.2.0] - 2026-11-24
 
 ### Changed
