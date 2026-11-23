@@ -63,7 +63,7 @@ int main()
             maxGain = std::max (maxGain, std::abs ((double) l) / std::abs ((double) in));
     }
 
-    printf ("burst: max gain %.6f (limit 1.05), boost %.3f dB\n",
+    printf ("burst: max gain %.6f (limit 1.01), boost %.3f dB\n",
             maxGain, 20.0 * std::log10 (maxGain));
 
     // ---- silence ---------------------------------------------------------
@@ -72,7 +72,7 @@ int main()
     ts.process (l, r);
     printf ("silence: output %.6f %.6f\n", (double) l, (double) r);
 
-    const bool ok = maxGain <= 1.05 + 1.0e-6
+    const bool ok = maxGain <= 1.01 + 1.0e-6
                     && maxGain > 1.0
                     && worstSteady < 2.0e-3
                     && std::isfinite (l) && std::isfinite (r);

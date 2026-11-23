@@ -10,7 +10,7 @@
 
     An internal attack enhancer at the very front of the signal chain. It is
     always active, has no parameter, no UI control and no bypass. It adds up
-    to 5% of the detected transient (gain 1.00 -> 1.05) and leaves the
+    to 1% of the detected transient (gain 1.00 -> 1.01) and leaves the
     sustain alone.
 
     Detector: stereo-linked mean-square envelope.
@@ -18,8 +18,8 @@
       slow envelope: 100 ms smoothing of the fast envelope
 
     The positive difference (fast - slow), normalised by the slow envelope,
-    drives the gain. The gain is clamped to 1.05, so the maximum boost is
-    exactly 5% (about +0.42 dB). On steady material fast and slow converge,
+    drives the gain. The gain is clamped to 1.01, so the maximum boost is
+    exactly 1% (about +0.086 dB). On steady material fast and slow converge,
     the difference goes to zero and the gain returns to exactly 1.00.
 
     Zero latency: both envelopes are causal; there is no look-ahead or delay
@@ -27,7 +27,7 @@
 */
 struct TransientShaper
 {
-    static constexpr double kAttackAmount = 0.05;   // fixed +5%
+    static constexpr double kAttackAmount = 0.01;   // fixed +1%
 
     void prepare (double sampleRate) noexcept
     {

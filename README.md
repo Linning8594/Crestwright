@@ -123,8 +123,8 @@ frequency and Q table above is published.
 ## Transient shaper
 
 A fixed transient shaper runs at the very front of the chain, before INPUT.
-It is always active and has no control in the UI. It adds up to +5% attack
-(gain 1.00 → 1.05, about +0.42 dB) and leaves the sustain alone; on steady
+It is always active and has no control in the UI. It adds up to +1% attack
+(gain 1.00 → 1.01, about +0.086 dB) and leaves the sustain alone; on steady
 material the gain returns to exactly 1.00. It is stereo-linked and
 zero-latency.
 
@@ -141,7 +141,7 @@ use). The font files and licence are in `Assets/Fonts/`.
 - Phase magnitude: max deviation 3.0e-7 dB over 10 Hz–20 kHz
 - Phase depth scaling is exactly linear: 14.28 / 28.55 / 42.83 / 57.11 ms
   at 20 Hz for 1x / 2x / 3x / 4x
-- Transient shaper: maximum +5.00% attack (gain 1.050, about +0.42 dB);
+- Transient shaper: maximum +1.00% attack (gain 1.010, about +0.086 dB);
   steady-state gain returns to 1.000; zero latency
 - Depth switching: no sample-level discontinuity (max step stays at the
   natural slope of the test sine); NaN/Inf input recovers immediately
@@ -164,7 +164,7 @@ use). The font files and licence are in `Assets/Fonts/`.
 
 ## Installer
 
-`dist\Crestwright_Setup_1.2.1.exe`
+`dist\Crestwright_Setup_1.2.2.exe`
 
 Contents:
 - VST3 plugin → `C:\Program Files\Common Files\VST3\Crestwright.vst3`

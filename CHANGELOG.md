@@ -4,6 +4,13 @@ All notable changes to Crestwright are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project uses [Semantic Versioning](https://semver.org/).
 
+## [1.2.2] - 2026-11-24
+
+### Changed
+
+- Transient shaper attack amount reduced from 5% to 1%. Maximum gain is now
+  1.010 (about +0.086 dB); steady-state gain remains 1.000.
+
 ## [1.2.1] - 2026-11-24
 
 ### Fixed
